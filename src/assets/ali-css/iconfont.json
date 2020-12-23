@@ -1,0 +1,135 @@
+{
+  "id": "2280320",
+  "name": "smarthr",
+  "font_family": "iconfont",
+  "css_prefix_text": "el-icon-ali",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "10566282",
+      "name": "exe",
+      "font_class": "exe1",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "10135301",
+      "name": "swf",
+      "font_class": "swf",
+      "unicode": "e8bf",
+      "unicode_decimal": 59583
+    },
+    {
+      "icon_id": "12904097",
+      "name": "CSS",
+      "font_class": "CSS",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "13303629",
+      "name": "javascript-map",
+      "font_class": "javascript-map",
+      "unicode": "e676",
+      "unicode_decimal": 58998
+    },
+    {
+      "icon_id": "18613391",
+      "name": "HTML",
+      "font_class": "HTML",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "18613395",
+      "name": "XML",
+      "font_class": "XML",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "3965525",
+      "name": "Microsoft-Excel",
+      "font_class": "Microsoft-Excel",
+      "unicode": "e6d6",
+      "unicode_decimal": 59094
+    },
+    {
+      "icon_id": "4628497",
+      "name": "WORD",
+      "font_class": "WORD",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
+      "icon_id": "4628503",
+      "name": "PPT",
+      "font_class": "PPT",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    },
+    {
+      "icon_id": "7226336",
+      "name": "压缩包",
+      "font_class": "yasuobao",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "8987160",
+      "name": "视频",
+      "font_class": "shipin",
+      "unicode": "e63b",
+      "unicode_decimal": 58939
+    },
+    {
+      "icon_id": "11448884",
+      "name": "文件夹",
+      "font_class": "wenjianjia",
+      "unicode": "e80c",
+      "unicode_decimal": 59404
+    },
+    {
+      "icon_id": "14477243",
+      "name": "图片",
+      "font_class": "tupian",
+      "unicode": "e677",
+      "unicode_decimal": 58999
+    },
+    {
+      "icon_id": "15416681",
+      "name": "txt",
+      "font_class": "txt",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "16328044",
+      "name": "音乐",
+      "font_class": "yinle",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
+      "icon_id": "16388841",
+      "name": "文档",
+      "font_class": "wendang",
+      "unicode": "e67e",
+      "unicode_decimal": 59006
+    },
+    {
+      "icon_id": "17810992",
+      "name": "exe",
+      "font_class": "exe",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "18613392",
+      "name": "PDF",
+      "font_class": "PDF",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    }
+  ]
+}
