@@ -67,8 +67,13 @@
           <el-button v-if="scope.row.isFolder==0"
                      type="primary"
                      size="mini"
-                     @click="handleDownload(scope.$index, scope.row)">
+                     @click="handleDownload(scope.row)">
             下载
+          </el-button>
+          <el-button
+              v-if="scope.row.isFolder==0"
+              size="mini"
+              @click="handleShare(scope.row)">分享
           </el-button>
           <el-button
               size="mini"
@@ -108,17 +113,45 @@
     <el-button type="primary" @click="dialogOk">确 定</el-button>
     </span>
     </el-dialog>
+
+    <el-dialog
+        title="分享"
+        :visible.sync="shareDialogVisible"
+        width="30%">
+      <span>为防止机密文件泄露，请设置下载链接到期时间，以小时为单位</span>
+      <div>
+        <el-input-number v-model="expirationHours" :min="1" :max="10" label="链接到期时间"></el-input-number>
+        <el-tag>小时</el-tag>
+      </div>
+      <el-input
+          :readonly="true"
+          type="textarea"
+          autosize
+          placeholder="生成的下载链接"
+          v-model="shareUrl">
+      </el-input>
+      <div id="qrcode" ref="qrcode"></div>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="makeShareUrl">生成链接</el-button>
+      <el-button type="primary" @click="makeQrcode">生成二维码</el-button>
+      <el-button @click="shareDialogVisible = false">取 消</el-button>
+      </span>
+    </el-dialog>
+
+
   </div>
-
-
 </template>
 
 
 <script>
+import QRCode from 'qrcodejs2'
+
 export default {
   name: "Oss",
   data() {
     return {
+      shareUrl: '',
+      expirationHours: 1,
       mimeTypeMap: {
         0: '#el-icon-aliexe1',
         1: '#el-icon-alitxt',
@@ -138,6 +171,7 @@ export default {
         65: '#el-icon-aliyasuobao',
         66: '#el-icon-aliexe'
       },
+      shareDialogVisible: false,
       downloadUrl: '',
       globalObjectPath: '',
       globalObjectNameArray: [],
@@ -151,7 +185,8 @@ export default {
         host: ''
       },
       tableData: [],
-      dialogVisible: false
+      dialogVisible: false,
+      shareObjectName: ''
     };
   },
   mounted() {
@@ -168,7 +203,8 @@ export default {
               if (resp) {
                 this.$message({
                   type: 'success',
-                  message: '新建文件夹' + value + '成功'})
+                  message: '新建文件夹' + value + '成功'
+                })
               }
             })
         this.initObjectList();
@@ -186,8 +222,9 @@ export default {
             .then(resp => {
               if (resp) {
                 this.$message({
-                  type: 'success',
-                  message: '成功重命名为: ' + value}
+                      type: 'success',
+                      message: '成功重命名为: ' + value
+                    }
                 );
                 this.initObjectList();
               }
@@ -211,7 +248,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.getRequest("/cloud/oss/deleteObject", {"delObject": this.globalObjectPath+row.key}).then(resp => {
+        this.getRequest("/cloud/oss/deleteObject", {"delObject": this.globalObjectPath + row.key}).then(resp => {
           if (resp) {
             this.initObjectList();
           }
@@ -245,14 +282,59 @@ export default {
       this.globalObjectPath += row.key;
       this.initObjectList();
     },
-    handleDownload(index, row) {
-      this.getRequest("/cloud/oss/signUrl", {objectName: this.globalObjectPath + row.key}).then(resp => {
-        if (resp) {
-          this.downloadUrl = resp.obj;
-          console.log('this.downloadUrl', this.downloadUrl)
-          window.open(this.downloadUrl);
-        }
+    handleShare(row) {
+      this.shareUrl = '';
+      if (this.qrcode != null) {
+        document.getElementById('qrcode').innerHTML = '';
+      }
+      this.shareObjectName = row.key;
+      this.shareDialogVisible = true;
+    },
+    makeShareUrl() {
+      this.getSignUrl(this.shareObjectName, this.expirationHours);
+    },
+    makeQrcode() {
+      if (this.qrcode != null) {
+        document.getElementById('qrcode').innerHTML = '';
+      }
+      if (this.shareUrl == '') {
+        this.$message({
+          message: '请先生成下载链接',
+          type: 'info'
+        });
+      } else {
+        this.qrcode = new QRCode('qrcode', {
+          text: this.shareUrl,
+          width: 150,
+          height: 150,
+        });
+      }
+
+    },
+    async handleDownload(row) {
+
+      var res = await this.getSignUrl(this.globalObjectPath + row.key, 8);
+      this.downloadUrl = res.obj;
+
+      window.open(this.downloadUrl);
+      this.downloadUrl = '';
+      this.$message({
+        message: '请求下载成功，正在下载中...',
+        type: 'success'
       });
+
+    },
+    getSignUrl: function (objectName, expirationHours) {
+      return new Promise((resolve, reject) => {
+        this.getRequest("/cloud/oss/signUrl", {
+          "objectName": objectName,
+          "expirationHours": expirationHours
+        }).then((response) => {
+          resolve(response);
+        }).catch((error) => {
+          reject(error);
+        });
+      })
     },
     initObjectList() {
       this.getRequest("/cloud/oss/getObjectList", {objectName: this.globalObjectPath}).then(resp => {
@@ -262,7 +344,6 @@ export default {
       })
     },
     onSuccess(response, file, fileList) {
-
 
       this.$message({
         message: file.name + '上传成功',
@@ -289,9 +370,9 @@ export default {
           _self.dataObj.policy = resp.obj.policy;
           _self.dataObj.signature = resp.obj.signature;
           _self.dataObj.ossaccessKeyId = resp.obj.accessKeyId;
-          if(this.globalObjectPath==''){
+          if (this.globalObjectPath == '') {
             _self.dataObj.key = '${filename}';
-          }else {
+          } else {
             _self.dataObj.key = resp.obj.dir + '/${filename}';
           }
           _self.dataObj.dir = resp.obj.dir;

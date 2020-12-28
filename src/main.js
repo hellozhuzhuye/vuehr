@@ -6,13 +6,16 @@ import './assets/ali-css/iconfont.css'
 import './assets/ali-css/iconfont.js'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import QRCode from 'qrcodejs2'
 
 Vue.use(ElementUI);
+
 
 Vue.prototype.$ELEMENT = {size: 'small', zIndex: 3000};
 Vue.prototype.$alert = ElementUI.MessageBox.alert
 Vue.prototype.$confirm = ElementUI.MessageBox.confirm
-
+// 全局修改默认配置，点击空白处不能关闭弹窗
+ElementUI.Dialog.props.closeOnClickModal.default = false
 import {postRequest} from "./utils/api";
 import {postKeyValueRequest} from "./utils/api";
 import {putRequest} from "./utils/api";

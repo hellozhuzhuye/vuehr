@@ -1,5 +1,8 @@
 <template>
     <div>
+      <div class="background">
+        <img src="../assets/bg_login.jpg" width="100%" height="100%" alt="" />
+      </div>
         <el-form
                 :rules="rules"
                 ref="loginForm"
@@ -23,7 +26,7 @@
                           placeholder="点击图片更换验证码" @keydown.enter.native="submitLogin" style="width: 250px"></el-input>
                 <img :src="vcUrl" @click="updateVerifyCode" alt="" style="cursor: pointer">
             </el-form-item>
-            <el-checkbox size="normal" class="loginRemember" v-model="checked"></el-checkbox>
+            <el-checkbox size="normal" class="loginRemember" v-model="checked">记住密码</el-checkbox>
             <el-button size="normal" type="primary" style="width: 100%;" @click="submitLogin">登录</el-button>
         </el-form>
     </div>
@@ -82,7 +85,7 @@
     .loginContainer {
         border-radius: 15px;
         background-clip: padding-box;
-        margin: 180px auto;
+        margin: 0px auto;
         width: 350px;
         padding: 15px 35px 15px 35px;
         background: #fff;
@@ -104,4 +107,11 @@
         display: flex;
         align-items: center;
     }
+    .background{
+       width:100%;
+       height:100%;
+       z-index:-1;
+       position: absolute;
+     }
+
 </style>
