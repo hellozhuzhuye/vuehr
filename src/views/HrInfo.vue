@@ -158,6 +158,7 @@
         methods: {
             onSuccess() {
                 this.initHr();
+                this.$message.success("更新头像成功!");
             },
             updateHrInfo() {
                 this.putRequest("/hr/info", this.hr2).then(resp => {

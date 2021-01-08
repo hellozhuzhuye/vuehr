@@ -1,6 +1,18 @@
 <template>
     <div>
         <div>
+          <div style="display: flex;justify-content: space-between; margin-bottom: 10px">
+            <div>
+              <el-input placeholder="请输入员工名进行搜索，可以直接回车搜索..." prefix-icon="el-icon-search"
+                        clearable
+                        @clear="initEmps"
+                        style="width: 350px;margin-right: 10px" v-model="keyword"
+                        @keydown.enter.native="initEmps" ></el-input>
+              <el-button icon="el-icon-search" type="primary" @click="initEmps">
+                搜索
+              </el-button>
+            </div>
+          </div>
             <el-table :data="emps" border stripe size="mini">
                 <el-table-column type="selection" align="left" width="55"></el-table-column>
                 <el-table-column prop="name" label="姓名" fixed width="120" align="left"></el-table-column>
@@ -8,7 +20,7 @@
                 <el-table-column prop="email" label="电子邮件" width="200" align="left"></el-table-column>
                 <el-table-column prop="phone" label="电话号码" width="120" align="left"></el-table-column>
                 <el-table-column prop="department.name" label="所属部门" width="120" align="left"></el-table-column>
-                <el-table-column label="所属部门" align="center">
+                <el-table-column label="工资账套" align="center">
                     <template slot-scope="scope">
                         <el-tooltip placement="right" v-if="scope.row.salary">
                             <div slot="content">
@@ -106,7 +118,8 @@
         name: "SalSobCfg",
         data() {
             return {
-                emps: [],
+              keyword:'',
+              emps: [],
                 total: 0,
                 currentPage: 1,
                 currentSize: 10,
@@ -151,7 +164,7 @@
                 })
             },
             initEmps() {
-                this.getRequest("/salary/sobcfg/?page=" + this.currentPage + '&size=' + this.currentSize).then(resp => {
+                this.getRequest("/salary/sobcfg/?page=" + this.currentPage + '&size=' + this.currentSize+ '&name=' + this.keyword).then(resp => {
                     if (resp) {
                         this.emps = resp.data;
                         this.total = resp.total;

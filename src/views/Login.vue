@@ -12,7 +12,7 @@
                 element-loading-background="rgba(0, 0, 0, 0.8)"
                 :model="loginForm"
                 class="loginContainer">
-            <h3 class="loginTitle">系统登录</h3>
+            <h3 class="loginTitle">SmartHr人事管理系统登录</h3>
             <el-form-item prop="username">
                 <el-input size="normal" type="text" v-model="loginForm.username" auto-complete="off"
                           placeholder="请输入用户名"></el-input>
@@ -91,6 +91,10 @@
         background: #fff;
         border: 1px solid #eaeaea;
         box-shadow: 0 0 25px #cac6c6;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
     }
 
     .loginTitle {

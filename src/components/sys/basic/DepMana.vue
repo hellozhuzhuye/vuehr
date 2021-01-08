@@ -163,12 +163,18 @@
                 this.dep.parentId = data.id;
                 this.dialogVisible = true;
             },
-            initDeps() {
-                this.getRequest("/system/basic/department/").then(resp => {
-                    if (resp) {
-                        this.deps = resp;
-                    }
-                })
+            async initDeps() {
+              var res = await this.getDeps();
+              this.deps=res.obj;
+            },
+            getDeps: function (){
+              return new Promise((resolve, reject) => {
+                this.getRequest("/system/basic/department/").then((response) => {
+                  resolve(response);
+                }).catch((error) => {
+                  reject(error);
+                });
+              })
             },
             filterNode(value, data) {
                 if (!value) return true;

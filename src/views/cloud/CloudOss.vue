@@ -173,7 +173,7 @@ export default {
       },
       shareDialogVisible: false,
       downloadUrl: '',
-      globalObjectPath: '',
+      globalObjectPath: 'cloud/',
       globalObjectNameArray: [],
       fileList: [],
       dataObj: {
@@ -265,13 +265,13 @@ export default {
     },
     clearGlobalObjectName() {
       this.globalObjectNameArray = [];
-      this.globalObjectPath = '';
+      this.globalObjectPath = 'cloud/';
       this.initObjectList();
     },
     breadClick(index) {
       let arrLength = this.globalObjectNameArray.length;
       this.globalObjectNameArray.splice(index + 1, arrLength - 1);
-      this.globalObjectPath = '';
+      this.globalObjectPath = 'cloud/';
       for (let index in this.globalObjectNameArray) {
         this.globalObjectPath += this.globalObjectNameArray[index] + '/';
       }
@@ -290,8 +290,9 @@ export default {
       this.shareObjectName = row.key;
       this.shareDialogVisible = true;
     },
-    makeShareUrl() {
-      this.getSignUrl(this.shareObjectName, this.expirationHours);
+    async makeShareUrl() {
+      var res = await this.getSignUrl(this.shareObjectName, this.expirationHours);
+      this.shareUrl=res.obj;
     },
     makeQrcode() {
       if (this.qrcode != null) {
@@ -315,8 +316,10 @@ export default {
 
       var res = await this.getSignUrl(this.globalObjectPath + row.key, 8);
       this.downloadUrl = res.obj;
+      console.log(this.downloadUrl);
 
       window.open(this.downloadUrl);
+
       this.downloadUrl = '';
       this.$message({
         message: '请求下载成功，正在下载中...',
@@ -370,7 +373,7 @@ export default {
           _self.dataObj.policy = resp.obj.policy;
           _self.dataObj.signature = resp.obj.signature;
           _self.dataObj.ossaccessKeyId = resp.obj.accessKeyId;
-          if (this.globalObjectPath == '') {
+          if (this.globalObjectPath == 'cloud/') {
             _self.dataObj.key = '${filename}';
           } else {
             _self.dataObj.key = resp.obj.dir + '/${filename}';
