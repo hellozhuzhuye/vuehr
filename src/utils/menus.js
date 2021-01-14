@@ -48,6 +48,8 @@ export const formatRoutes = (routes) => {
                     require(['../views/sys/' + component + '.vue'], resolve);
                 } else if (component.startsWith("Cloud")) {
                     require(['../views/cloud/' + component + '.vue'], resolve);
+                } else if (component.startsWith("Att")) {
+                    require(['../views/att/' + component + '.vue'], resolve);
                 }
             }
         }

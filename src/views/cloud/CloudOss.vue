@@ -35,8 +35,7 @@
           <svg v-if="scope.row.isFolder==0" class="icon" aria-hidden="true">
             <use :href="mimeTypeMap[scope.row.iconCode]"></use>
           </svg>
-          <!--<i  v-if="scope.row.isFolder==1" class="el-icon-aliwenjianjia"></i>-->
-          <!--<i v-if="scope.row.isFolder==0" class="el-icon-aliMicrosoft-Excel"></i>-->
+
         </template>
 
       </el-table-column>
