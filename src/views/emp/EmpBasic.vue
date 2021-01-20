@@ -690,8 +690,8 @@ export default {
     this.initPositions();
   },
   methods: {
-    downloadTemplate(){
-      window.location="http://oss.smartsoftware.top/template/%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF.xls";
+    downloadTemplate() {
+      window.location = "http://oss.smartsoftware.top/template/%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF.xls";
     },
     searvhViewHandleNodeClick(data) {
       this.inputDepName = data.name;
@@ -882,6 +882,9 @@ export default {
     initEmps(type) {
       this.loading = true;
       let url = '/employee/basic/?page=' + this.page + '&size=' + this.size;
+      if (!this.showAdvanceSearchView && this.keyword){
+        url += "&name=" + this.keyword;
+      }
       if (type && type == 'advanced') {
         if (this.searchValue.politicId) {
           url += '&politicId=' + this.searchValue.politicId;
@@ -904,8 +907,6 @@ export default {
         if (this.searchValue.beginDateScope) {
           url += '&beginDateScope=' + this.searchValue.beginDateScope;
         }
-      } else {
-        url += "&name=" + this.keyword;
       }
       this.getRequest(url).then(resp => {
         this.loading = false;

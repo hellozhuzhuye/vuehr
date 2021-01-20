@@ -6,7 +6,7 @@
 
 <script>
     export default {
-        name: "StaScore"
+        name: "StaPoint"
     }
 </script>
 
