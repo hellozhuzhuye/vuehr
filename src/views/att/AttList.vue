@@ -154,7 +154,7 @@ export default {
       this.initAttList();
     },
     initAttList(){
-      let url='/attendance/empatt/?' + this.page + '&size=' + this.size;
+      let url='/attendance/empatt/?page=' + this.page + '&size=' + this.size;
       if (this.ename){
         url += "&name=" + this.ename;
       }
