@@ -219,8 +219,7 @@ export default {
           message: '已取消删除'
         });
       });
-    }
-    ,
+    },
     addEcRule() {
       if (this.ecRule.ecType && this.ecRule.ecPoint && this.ecRule.ecReason) {
         console.log(this.ecRule.ecType)
