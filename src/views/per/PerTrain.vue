@@ -305,7 +305,6 @@ export default {
       }
     },
     doUpdateEmpTrain() {
-      // console.log(this.updateTrain);
       if (this.updateTrain.id && this.updateTrain.eid && this.updateTrain.trainContent && this.updateTrain.trainDate){
         this.putRequest("/personnel/train/", this.updateTrain).then(resp => {
           if (resp) {
