@@ -4,7 +4,7 @@
       <el-input placeholder="请输入员工名进行搜索，可以直接回车搜索..." prefix-icon="el-icon-search"
                 clearable
                 @clear="initEmpTrain"
-                style="width: 350px;margin-right: 10px" v-model="name"
+                style="width: 350px;margin-right: 10px" v-model="outname"
                 @keydown.enter.native="initEmpTrain"></el-input>
       <el-button icon="el-icon-search" type="primary" @click="initEmpTrain">
         搜索
@@ -426,7 +426,7 @@ export default {
     initEmpTrain() {
       this.outloading = true;
       let url = '/personnel/train/?page=' + this.outpage + '&size=' + this.outsize;
-      if (this.name) {
+      if (this.outname) {
         url += "&name=" + this.outname;
       }
       this.getRequest(url).then(resp => {
