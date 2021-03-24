@@ -40,7 +40,7 @@
                         <el-breadcrumb-item>{{this.$router.currentRoute.name}}</el-breadcrumb-item>
                     </el-breadcrumb>
                     <div class="homeWelcome" v-if="this.$router.currentRoute.path=='/home'">
-                        HomePageTest
+                        Welcome to SmartHR !
                     </div>
                     <router-view class="homeRouterView"/>
                 </el-main>

@@ -1,15 +1,6 @@
 <template>
   <div>
     <div>
-
-      <!--      <el-select v-model="ecRule.ecType" slot="prepend" placeholder="请选择奖惩类型">-->
-      <!--        <el-option label="奖励" value="奖励"></el-option>-->
-      <!--        <el-option label="惩罚" value="惩罚"></el-option>-->
-      <!--      </el-select>-->
-      <!--      <el-input size="small" v-model="ecRule.ecReason" style="width: 300px;" prefix-icon="el-icon-plus"-->
-      <!--                placeholder="请输入奖惩原因"></el-input>-->
-      <!--      <el-input size="small" v-model="ecRule.ecPoint" style="width: 300px;" prefix-icon="el-icon-plus"-->
-      <!--                placeholder="请输入奖惩积分"></el-input>-->
       <el-input placeholder="请选择奖惩规则" v-model="empEcRuleMultipleSelection.ecReason" style="width: 300px;">
         <el-button icon="el-icon-search" slot="prepend" @click="getAllEcRules"></el-button>
       </el-input>

@@ -24,6 +24,7 @@ export const formatRoutes = (routes) => {
             iconCls,
             children
         } = router;
+        console.log(router.path);
         if (children && children instanceof Array) {
             children = formatRoutes(children);
         }
@@ -50,6 +51,8 @@ export const formatRoutes = (routes) => {
                     require(['../views/cloud/' + component + '.vue'], resolve);
                 } else if (component.startsWith("Att")) {
                     require(['../views/att/' + component + '.vue'], resolve);
+                } else if (component.startsWith("WorkFlow")) {
+                    require(['../views/workflow/' + component + '.vue'], resolve);
                 }
             }
         }
