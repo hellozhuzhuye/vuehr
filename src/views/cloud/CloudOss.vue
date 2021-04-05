@@ -172,7 +172,7 @@ export default {
       },
       shareDialogVisible: false,
       downloadUrl: '',
-      globalObjectPath: 'cloud/',
+      globalObjectPath: '/',
       globalObjectNameArray: [],
       fileList: [],
       dataObj: {
@@ -204,6 +204,7 @@ export default {
                   type: 'success',
                   message: '新建文件夹' + value + '成功'
                 })
+                this.initObjectList();
               }
             })
         this.initObjectList();
@@ -264,13 +265,13 @@ export default {
     },
     clearGlobalObjectName() {
       this.globalObjectNameArray = [];
-      this.globalObjectPath = 'cloud/';
+      this.globalObjectPath = '/';
       this.initObjectList();
     },
     breadClick(index) {
       let arrLength = this.globalObjectNameArray.length;
       this.globalObjectNameArray.splice(index + 1, arrLength - 1);
-      this.globalObjectPath = 'cloud/';
+      this.globalObjectPath = '/';
       for (let index in this.globalObjectNameArray) {
         this.globalObjectPath += this.globalObjectNameArray[index] + '/';
       }
@@ -372,8 +373,8 @@ export default {
           _self.dataObj.policy = resp.obj.policy;
           _self.dataObj.signature = resp.obj.signature;
           _self.dataObj.ossaccessKeyId = resp.obj.accessKeyId;
-          if (this.globalObjectPath == 'cloud/') {
-            _self.dataObj.key = '${filename}';
+          if (this.globalObjectPath == '/') {
+            _self.dataObj.key = 'cloud/${filename}';
           } else {
             _self.dataObj.key = resp.obj.dir + '/${filename}';
           }

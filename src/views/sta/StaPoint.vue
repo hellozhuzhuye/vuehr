@@ -10,6 +10,7 @@
         搜索
       </el-button>
     </div>
+    <div id="empPoint" style="width: 500px ; height: 500px ; margin: 10px auto"></div>
 
     <div style="margin-top: 10px">
       <el-table
@@ -20,7 +21,7 @@
           element-loading-spinner="el-icon-loading"
           element-loading-background="rgba(0, 0, 0, 0.8)"
           size="small"
-          style="width: 80%">
+          style="width: 505px ; height: 450px ;margin: 10px auto">
         <el-table-column
             type="selection"
             width="55">
@@ -77,8 +78,60 @@ export default {
   },
   mounted() {
     this.initEmpPoints();
+    this.drawEmpPoint();
   },
   methods: {
+    drawEmpPoint(){
+      // 基于准备好的dom，初始化echarts实例
+      let empPoint = this.$echarts.init(document.getElementById('empPoint'))
+      // 绘制图表
+      empPoint.setOption({
+        title: { text: '员工积分环形统计图',left:'center' },
+        tooltip: {
+          trigger: 'item'
+        },
+        legend: {
+          top: '5%',
+          left: 'center'
+        },
+        series: [
+          {
+            name: '访问来源',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            itemStyle: {
+              borderRadius: 10,
+              borderColor: '#fff',
+              borderWidth: 2
+            },
+            label: {
+              show: false,
+              position: 'center'
+            },
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: '40',
+                fontWeight: 'bold'
+              }
+            },
+            labelLine: {
+              show: false
+            },
+            data: [
+              {value: 13, name: '<0'},
+              {value: 102, name: '0-100'},
+              {value: 118, name: '100-200'},
+              {value: 124, name: '200-300'},
+              {value: 112, name: '300-400'},
+              {value: 113, name: '400-500'},
+              {value: 57, name: '>500'},
+            ]
+          }
+        ]
+      });
+    },
     sizeChange(currentSize) {
       this.size = currentSize;
       this.initEmpPoints();

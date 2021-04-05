@@ -6,10 +6,12 @@ import './assets/ali-css/iconfont.css'
 import './assets/ali-css/iconfont.js'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import * as echarts from 'echarts';
 import QRCode from 'qrcodejs2'
 
 Vue.use(ElementUI);
 
+Vue.prototype.$echarts = echarts
 
 Vue.prototype.$ELEMENT = {size: 'small', zIndex: 3000};
 Vue.prototype.$alert = ElementUI.MessageBox.alert
