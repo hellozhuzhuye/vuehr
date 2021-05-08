@@ -225,7 +225,6 @@
               {
                 title: {
                   text: '员工学历统计',
-                  subtext: '纯属虚构',
                   left: 'center'
                 },
                 tooltip: {

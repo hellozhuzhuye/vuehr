@@ -31,6 +31,11 @@
             width="200">
         </el-table-column>
         <el-table-column
+            prop="selectDateTime"
+            label="开始时间与结束时间"
+            width="250">
+        </el-table-column>
+        <el-table-column
             prop="hrNames"
             label="审核人"
             width="200">
@@ -44,7 +49,7 @@
             label="操作">
           <template slot-scope="scope">
             <el-button type="primary" size="small" @click="showDetailView(scope.row)">详细</el-button>
-            <el-button size="small" type="danger" @click="deleteHandler(scope.row)">删除</el-button>
+<!--            <el-button size="small" type="danger" @click="deleteHandler(scope.row)">删除</el-button>-->
           </template>
         </el-table-column>
       </el-table>

@@ -130,7 +130,7 @@
     </el-dialog>
 
         <el-dialog
-            title="修改员工培训记录"
+            title="修改员工考评记录"
             :visible.sync="editdialogVisible"
             width="30%">
 
@@ -156,7 +156,7 @@
               v-model="updateEval.date"
               align="right"
               type="date"
-              placeholder="请选择培训日期"
+              placeholder="请选择考评日期"
               :picker-options="pickerOptions">
           </el-date-picker>
           <el-input style="margin-top: 10px" placeholder="请输入备注内容" v-model="updateEval.remark">

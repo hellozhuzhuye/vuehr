@@ -352,6 +352,7 @@ export default {
         message: file.name + '上传成功',
         type: 'success'
       });
+      this.postRequest("/system/log/",{'operate':'上传了OSS文件：'+file.name,'type':0});
       this.initObjectList();
     },
     onError(err, file) {
