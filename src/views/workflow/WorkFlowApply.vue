@@ -91,6 +91,7 @@
       <el-date-picker
           style="margin-top: 10px "
           v-model="pickDate"
+          value-format="yyyy-MM-dd HH:mm:ss"
           align="right"
           type="date"
           placeholder="请选择日期"
@@ -136,6 +137,7 @@
       <div class="block" style="margin-top: 10px">
         <el-date-picker
             v-model="dateTime"
+            value-format="yyyy-MM-dd HH:mm:ss"
             type="datetimerange"
             range-separator="至"
             start-placeholder="开始日期"
@@ -237,7 +239,7 @@ export default {
       loading:false,
       addWorkFlowApply:{
         workFlowTypeId:1,
-        hrid:"10,11,12",
+        hrid:"",
         content:"",
         selectDateTime:"",
         url:"http://smartsoftware.top"
@@ -328,14 +330,14 @@ export default {
     advAddDialogOk(){
       if (this.textarea && this.dateTime) {
         this.addWorkFlowApply.content=this.textarea;
-        // this.addWorkFlowApply.hrid=this.hrids;
+        this.addWorkFlowApply.hrid=this.hrids.toString();
         this.addWorkFlowApply.selectDateTime=this.dateTime.toString();
 
         this.postRequest("/workflow/apply/", this.addWorkFlowApply).then(resp => {
           if (resp) {
             this.addWorkFlowApply = {
               workFlowTypeId:1,
-              hrid:"10,11,12",
+              hrid:"",
               content:"",
               selectDateTime:"",
               url:"http://smartsoftware.top"
